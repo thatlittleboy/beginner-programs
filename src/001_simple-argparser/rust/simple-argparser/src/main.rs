@@ -1,4 +1,7 @@
-use std::{collections::HashMap, env};
+#![warn(clippy::nursery)]
+use std::collections::HashMap;
+use std::env;
+use std::process;
 
 struct Parameter {
     options: String,
@@ -15,30 +18,33 @@ impl Parameter {
     // 3. `args.get("-O")` will return an Option<&String>, in this case, `Some(&"xyz")`.
     //    A reference to the string "xyz".
     // 4. Convert the Option<&String> to Result<&String> with `ok_or_else`.
-    fn new() -> Result<Parameter, String> {
+    fn new() -> Result<Self, String> {
         let args = env::args()
             .zip(env::args().skip(1))
             .collect::<HashMap<String, String>>();
 
-        let options: String = args.get("-O")
+        let options: String = args
+            .get("-O")
             .ok_or_else(|| String::from("Options not specified"))?
             .to_owned();
 
-        let filename: String = args.get("-F")
+        let filename: String = args
+            .get("-F")
             .ok_or_else(|| String::from("Filename not specified"))?
             .to_owned();
 
-        Ok(Parameter { options, filename })
+        Ok(Self { options, filename })
     }
 }
 
 fn main() {
+    // use eprintln macro to print to stderr if unsuccessful parsing of args
     let p = Parameter::new();
     let pv: Parameter = match p {
         Ok(p) => p,
         Err(error) => {
-            println!("{}", error);
-            return
+            eprintln!("{}", error);
+            process::exit(1);
         }
     };
 
