@@ -1,3 +1,4 @@
+#![warn(clippy::nursery)]
 use std::env;
 use std::error::Error;
 use std::fs;
@@ -17,7 +18,10 @@ impl Config {
 
         let query = args[1].clone();
         let filename = args[2].clone();
-        // NOTE: clone() is a cop-out method of dealing with ownership problems
+        // NOTE: `clone()` is a cop-out method of dealing with ownership problems.
+        // We needed `clone()` because we have a slice with String elements `args`,
+        // but the `new` function doesn't own `args`. To return ownership of a Config
+        // instance and the Config instance can own its values, clone was used.
 
         let ignore_case = env::var("IGNORE_CASE").is_ok();
 
