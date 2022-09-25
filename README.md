@@ -26,3 +26,7 @@ And within each language folder, you can structure the folder however required b
 Haven't thought about this yet. But most likely will just use the global environment.
 
 Since in preferring minimal solutions over heavier ones, we should be able to complete these without installing a dedicated venv for every single exercise.
+
+## Resources
+### Rust
+* [Tour of rust](https://tourofrust.com/)
