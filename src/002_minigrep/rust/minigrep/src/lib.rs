@@ -12,7 +12,7 @@ pub struct Config {
 
 impl Config {
     pub fn new(mut args: impl Iterator<Item = String>) -> Result<Self, &'static str> {
-        args.next();
+        args.next(); // or args.skip(1)
 
         let query = match args.next() {
             Some(arg) => arg,
