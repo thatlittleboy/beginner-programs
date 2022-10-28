@@ -30,3 +30,4 @@ Since in preferring minimal solutions over heavier ones, we should be able to co
 ## Resources
 ### Rust
 * [Tour of rust](https://tourofrust.com/)
+* [Practice.rs](https://practice.rs)
